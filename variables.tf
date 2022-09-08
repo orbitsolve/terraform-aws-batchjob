@@ -6,6 +6,16 @@ variable "lambda_source_file" {
   type = string
 }
 
+variable "lambda_language" {
+  type = string
+  default = "python"
+}
+
+variable "lambda_timeout" {
+  type = number
+  default = 180
+}
+
 variable "lambda_layers" {
   type = list(string)
 }
@@ -15,7 +25,7 @@ variable "schedule" {
 }
 
 variable "lambda_env_vars" {
-  type = map
+  type = map(any)
 }
 
 variable "lambda_execution_role" {
@@ -23,5 +33,5 @@ variable "lambda_execution_role" {
 }
 
 variable "tags" {
-  type = map
+  type = map(any)
 }

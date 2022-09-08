@@ -9,9 +9,9 @@ resource "aws_lambda_function" "batchjob_lambda_function" {
   filename         = "${var.lambda_name}-Lambda.zip"
   source_code_hash = data.archive_file.python_lambda_package_batchjob.output_base64sha256
   role             = var.lambda_execution_role
-  runtime          = "python3.9"
-  handler          = "lambda_function.lambda_handler"
-  timeout          = 180
+  runtime          = (var.lambda_language == "python") ? "python3.9" : "nodejs16.x"
+  handler          = (var.lambda_language == "python") ? "lambda_function.lambda_handler" : "index.hanlder"
+  timeout          = var.lambda_timeout
 
   layers = var.lambda_layers
 
